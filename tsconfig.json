@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "module": "es6",
+      "outDir": "static/script",
+      "rootDir": "src/typescript/",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true
+    },
+    "include": [
+      "src/typescript/"
+    ]
+}

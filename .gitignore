@@ -1,0 +1,7 @@
+/src/typescript/wasm-module
+/static/script
+
+/target
+/node_modules
+package-lock.json
+Cargo.lock
