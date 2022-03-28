@@ -119,8 +119,8 @@ mod tests {
 
     #[test]
     fn should_multiply_different_sizes() {
-        let m1 = Matrix::new(1, 3, vec![1.0, 2.0, 3.0, 4.0]);
-        let m2 = Matrix::new(3, 1, vec![1.0, 2.0, 3.0, 4.0]);
+        let m1 = Matrix::new(1, 3, vec![1.0, 2.0, 3.0]);
+        let m2 = Matrix::new(3, 1, vec![1.0, 2.0, 3.0]);
         let res_m = m1.multiply(&m2);
 
         assert!(res_m.is_ok());
@@ -156,21 +156,21 @@ mod tests {
     }
 
     #[test]
-    fn should_return_invalid_input_error_when_matrix_bounds_not_satisfied_for_multiplication() {
-        let m1 = Matrix::new(1, 2, vec![1.0, 2.0]);
-        let m2 = Matrix::new(3, 2, vec![1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0, 4.0]);
-        let res_m = m1.multiply(&m2);
-
-        assert!(res_m.is_err());
-    }
-
-    #[test]
-    fn t2() {
+    fn should_return_correct_values_in_output_matrix_3() {
         let m1 = Matrix::new(8, 4, (1..8*4+1).map(f64::from).collect());
         let m2 = Matrix::new(3, 8, (1..3*8+1).map(f64::from).collect());
         let res_m = m1.multiply(&m2);
         let correct_res = Matrix::new(3, 4, vec![540.0, 576.0, 612.0, 1276.0, 1376.0, 1476.0, 2012.0, 2176.0, 2340.0, 2748.0, 2976.0, 3204.0]);
         assert!(res_m.is_ok());
         assert_eq!(res_m.unwrap(), correct_res);
+    }
+
+    #[test]
+    fn should_return_invalid_input_error_when_matrix_bounds_not_satisfied_for_multiplication() {
+        let m1 = Matrix::new(1, 2, vec![1.0, 2.0]);
+        let m2 = Matrix::new(3, 2, vec![1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0, 4.0]);
+        let res_m = m1.multiply(&m2);
+
+        assert!(res_m.is_err());
     }
 }
