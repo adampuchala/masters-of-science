@@ -1,3 +1,10 @@
+export class MatrixError extends Error {
+    constructor(msg: string) {
+        super(msg)
+        Object.setPrototypeOf(this, MatrixError.prototype)
+    }
+}
+
 export class Matrix {
     width: number
     height: number
@@ -14,7 +21,11 @@ export class Matrix {
         this.data = data
     }
 
-    mutiply(other: Matrix): Matrix {
+    public mutiply(other: Matrix): Matrix {
+        if (this.width != other.height) {
+            throw new MatrixError("Invalid input")
+        }
+
         const newMatrixData = Array<number>();
         let newWidth = 0;
         if(this.width < other.width) {
@@ -41,7 +52,7 @@ export class Matrix {
         return this.data[idx]
     }
 
-    toString(): string {
+    public toString(): string {
         let outputStr = Array<string>()
 
         for(let j = 0; j<this.height; j++) {
@@ -52,5 +63,9 @@ export class Matrix {
         }
 
         return outputStr.join("")
+    }
+
+    public equals(other: Matrix): boolean {
+        return this.width === other.width && this.height === other.height && this.data === other.data
     }
 }
