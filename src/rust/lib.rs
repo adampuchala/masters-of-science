@@ -1,5 +1,6 @@
-use wasm_bindgen::{prelude::*};
+use wasm_bindgen::prelude::*;
 use std::{fmt::{Display, Formatter}, cmp::min};
+
 
 #[wasm_bindgen]
 extern {
@@ -82,19 +83,22 @@ impl Display for Matrix {
 
 #[wasm_bindgen]
 pub fn matrix_multiplication() {
-    let m1 = Matrix::new(3, 3, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]);
-    let m2 = Matrix::new(3, 3, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]);
-    let res_m = m1.multiply(&m2).unwrap();
+    let window = web_sys::window().expect("");
+    
+    let performance = window.performance().expect("");
 
+    let start = performance.now();
+    for _ in 0..10000000 {
+        let m1 = Matrix::new(3, 3, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]);
+        let m2 = Matrix::new(3, 3, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]);
+        m1.multiply(&m2).unwrap();
 
-    let m3 = Matrix::new(5, 2, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]);
-    let m4 = Matrix::new(1, 5, vec![1.0, 2.0, 3.0, 4.0, 5.0]);
-    let res2 = m3.multiply(&m4).unwrap();
-    console_log("Matrix 1:");
-    console_log(format!("{}", res_m).as_str());
-    console_log("Matrix 2:");
-    console_log(format!("{}", res2).as_str());
-
+        let m3 = Matrix::new(5, 2, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]);
+        let m4 = Matrix::new(1, 5, vec![1.0, 2.0, 3.0, 4.0, 5.0]);
+        m3.multiply(&m4).unwrap();
+    }
+    let end = performance.now();
+    console_log(format!("Webassembly time: {}", end - start).as_str());
 }
 
 #[wasm_bindgen]
