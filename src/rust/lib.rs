@@ -87,14 +87,18 @@ pub fn matrix_multiplication() {
     
     let performance = window.performance().expect("");
 
+    let m1 = Matrix::new(3, 3, vec![1.324, 2.64, 3.3434, 4.345, 5.3434, 6.34634643, 7.3463, 8.34, 9.34]);
+    let m2 = Matrix::new(3, 3, vec![1.34634, 2.34634, 3.34634643, 4.346, 5.76, 6.456, 7.456854, 8.4565, 9.56856]);
+
+    let m3 = Matrix::new(5, 2, vec![1.675, 2.456, 3.4564, 4.46, 5.4564564, 6.456, 7.45, 8.34, 9.345, 10.346]);
+    let m4 = Matrix::new(1, 5, vec![1.3463, 2.346346, 3.346436, 4.346, 5.34634634]);
+
     let start = performance.now();
-    for _ in 0..10000000 {
-        let m1 = Matrix::new(3, 3, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]);
-        let m2 = Matrix::new(3, 3, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]);
+    for _ in 0..1000000 {
+        
         m1.multiply(&m2).unwrap();
 
-        let m3 = Matrix::new(5, 2, vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]);
-        let m4 = Matrix::new(1, 5, vec![1.0, 2.0, 3.0, 4.0, 5.0]);
+        
         m3.multiply(&m4).unwrap();
     }
     let end = performance.now();
