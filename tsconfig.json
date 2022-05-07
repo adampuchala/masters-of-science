@@ -1,12 +1,14 @@
 {
     "compilerOptions": {
       "moduleResolution": "node",
-      "module": "es6",
+      "module": "es2020",
       "outDir": "static/script",
       "rootDir": "src/typescript/",
       "noImplicitAny": true,
       "removeComments": true,
-      "preserveConstEnums": true
+      "preserveConstEnums": true,
+      "noEmit": false,
+      "noEmitOnError": false
     },
     "include": [
       "src/typescript/"

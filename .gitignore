@@ -1,5 +1,6 @@
 /src/typescript/wasm-module
-/static/script
+/static/*.js
+/static/*.wasm
 
 /target
 /node_modules
