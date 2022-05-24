@@ -1,5 +1,6 @@
 const path = require('path');
 const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -25,7 +26,7 @@ module.exports = {
       new WasmPackPlugin({
           crateDirectory: path.resolve(__dirname, './src/rust'),
           extraArgs: '--no-typescript',
-      })
+      }),
   ],
   experiments: {
       syncWebAssembly: true

@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
       "moduleResolution": "node",
-      "module": "es2020",
+      "module": "es6",
       "outDir": "static/script",
       "rootDir": "src/typescript/",
       "noImplicitAny": true,

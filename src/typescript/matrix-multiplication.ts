@@ -1,3 +1,4 @@
+
 export class MatrixError extends Error {
     constructor(msg: string) {
         super(msg)
@@ -67,5 +68,18 @@ export class Matrix {
 
     public equals(other: Matrix): boolean {
         return this.width === other.width && this.height === other.height && this.data === other.data
+    }
+}
+
+function matrix_multiplication_ts() {
+    let matrix1 = new Matrix(3, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    let matrix2 = new Matrix(3, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+    let m3 = new Matrix(5, 2, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    let m4 = new Matrix(1, 5, [1, 2, 3, 4, 5]);
+
+    for(let i=0; i<10; i++) {
+        matrix1.mutiply(matrix2)
+        m3.mutiply(m4)
     }
 }
