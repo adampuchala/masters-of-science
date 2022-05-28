@@ -1,9 +1,6 @@
 ## TODO - Badania, Magisterka
 
 -------------
-
-- Zaimplementować narzędzie do pomiarów wydajności - czas i zużyta pamięć
-
 - Zbadać możliwości PolyBench napisanym w Rust
 - Zbadać trudność implementacji algorytmów z PolyBench w Javascript
 
