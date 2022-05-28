@@ -16,5 +16,6 @@ function tsMain() {
 // @ts-ignore
 import('./../../pkg').then((module)=> {
     console.log(`webassembly ${module.run_wasm_benchmarks()}`)
+    console.log(`webassembly polybench ${module.launch_poly_benchmark()}`)
     console.log(`js ${measureTimeAndMemory(()=>tsMain())}`)
 })
