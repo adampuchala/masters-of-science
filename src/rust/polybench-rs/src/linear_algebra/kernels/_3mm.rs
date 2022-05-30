@@ -96,7 +96,7 @@ pub fn bench<
     const NK: usize,
     const NL: usize,
     const NM: usize,
->() -> Duration {
+>() {
     let ni = NI;
     let nj = NJ;
     let nk = NK;
@@ -113,11 +113,7 @@ pub fn bench<
 
     unsafe {
         init_array(ni, nj, nk, nl, nm, &mut A, &mut B, &mut C, &mut D);
-        let elapsed = util::time_function(|| {
-            kernel_3mm(ni, nj, nk, nl, nm, &mut E, &A, &B, &mut F, &C, &D, &mut G)
-        });
-        util::consume(G);
-        elapsed
+        kernel_3mm(ni, nj, nk, nl, nm, &mut E, &A, &B, &mut F, &C, &D, &mut G);
     }
 }
 

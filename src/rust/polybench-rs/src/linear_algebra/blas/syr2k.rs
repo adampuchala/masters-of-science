@@ -51,7 +51,7 @@ unsafe fn kernel_syr2k<const M: usize, const N: usize>(
     }
 }
 
-pub fn bench<const M: usize, const N: usize>() -> Duration {
+pub fn bench<const M: usize, const N: usize>()  {
     let m = M;
     let n = N;
 
@@ -63,10 +63,8 @@ pub fn bench<const M: usize, const N: usize>() -> Duration {
 
     unsafe {
         init_array(m, n, &mut alpha, &mut beta, &mut C, &mut A, &mut B);
-        let elapsed = util::time_function(|| kernel_syr2k(m, n, alpha, beta, &mut C, &A, &B));
-        util::consume(C);
-        elapsed
-    }
+        kernel_syr2k(m, n, alpha, beta, &mut C, &A, &B);
+}
 }
 
 #[test]

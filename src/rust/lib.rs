@@ -9,9 +9,7 @@ pub mod log;
 extern {
     #[wasm_bindgen(js_namespace = performance, js_name = memory)]
     pub fn memory() -> JsValue;
-
 }
-
 
 #[wasm_bindgen]
 pub fn run_wasm_benchmarks() -> Array  {
@@ -22,11 +20,55 @@ pub fn run_wasm_benchmarks() -> Array  {
 }
 
 #[wasm_bindgen]
-pub fn launch_poly_benchmark() -> Array {
-    use polybench_rs::stencils::jacobi_2d;
-
+pub fn launch_3mm_polybench_benchmark() -> Array {
+    use polybench_rs::linear_algebra::kernels::_3mm;
     let result = benchmark::measure_time_and_memory(||{
-        jacobi_2d::bench::<1000, 5>();
+        _3mm::bench::<80, 90, 100, 110, 120>();
+    });
+    Array::of2(&JsValue::from_f64(result.0), &JsValue::from_f64(result.1))
+}
+
+#[wasm_bindgen]
+pub fn launch_covariance_polybench_benchmark() -> Array {
+    use polybench_rs::datamining::covariance;
+    let result = benchmark::measure_time_and_memory(||{
+        covariance::bench::<1200, 1400>();
+    });
+    Array::of2(&JsValue::from_f64(result.0), &JsValue::from_f64(result.1))
+}
+
+#[wasm_bindgen]
+pub fn launch_syr2k_polybench_benchmark() -> Array {
+    use polybench_rs::linear_algebra::blas::syr2k;
+    let result = benchmark::measure_time_and_memory(||{
+        syr2k::bench::<1000,1200>();
+    });
+    Array::of2(&JsValue::from_f64(result.0), &JsValue::from_f64(result.1))
+}
+
+#[wasm_bindgen]
+pub fn launch_ludcmp_polybench_benchmark() -> Array {
+    use polybench_rs::linear_algebra::solvers::ludcmp;
+    let result = benchmark::measure_time_and_memory(||{
+        ludcmp::bench::<200>();
+    });
+    Array::of2(&JsValue::from_f64(result.0), &JsValue::from_f64(result.1))
+}
+
+#[wasm_bindgen]
+pub fn launch_floyd_warshall_polybench_benchmark() -> Array {
+    use polybench_rs::medley::floyd_warshall;
+    let result = benchmark::measure_time_and_memory(||{
+        floyd_warshall::bench::<280>();
+    });
+    Array::of2(&JsValue::from_f64(result.0), &JsValue::from_f64(result.1))
+}
+
+#[wasm_bindgen]
+pub fn launch_heat_3d_polybench_benchmark() -> Array {
+    use polybench_rs::stencils::heat_3d;
+    let result = benchmark::measure_time_and_memory(||{
+        heat_3d::bench::<120, 50>();
     });
     Array::of2(&JsValue::from_f64(result.0), &JsValue::from_f64(result.1))
 }
