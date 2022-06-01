@@ -1,9 +1,6 @@
 ## TODO - Badania, Magisterka
 
 -------------
-- Zbadać możliwości PolyBench napisanym w Rust
-- Zbadać trudność implementacji algorytmów z PolyBench w Javascript
-
 - Stworzyć framework do wysyłania statystyk do Google SpreadSheet
 
 - Wrzucić paczkę na GCP/AWS
