@@ -1,5 +1,6 @@
 import { measureTimeAndMemory } from './benchmark'
 import { bench_covariance } from './polybench/datamining/covariance'
+import { benchSyr2k } from './polybench/linear_algebra/blas/syr2k'
 import { bench_3mm } from './polybench/linear_algebra/kernels/_3mm'
 
 
@@ -25,6 +26,7 @@ import('./../../pkg').then((module)=> {
     // console.log(`webassembly polybench floyd warshall ${module.launch_floyd_warshall_polybench_benchmark()}`)
     // console.log(`webassembly polybench heat 3d ${module.launch_heat_3d_polybench_benchmark()}`)
 
-    console.log(`javascript polybench 3mm ${bench_3mm()}`)
-    console.log(`javascript polybench covariance ${bench_covariance()}`)
+    // console.log(`javascript polybench 3mm ${bench_3mm()}`)
+    // console.log(`javascript polybench covariance ${bench_covariance()}`)
+    console.log(`javascript polybench syr2k ${benchSyr2k()}`)
 })
