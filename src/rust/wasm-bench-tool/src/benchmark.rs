@@ -1,4 +1,4 @@
-use wasm_bindgen::{JsValue};
+use wasm_bindgen::{JsValue, prelude::wasm_bindgen, JsCast};
 use web_sys::Performance;
 
 
@@ -9,12 +9,17 @@ fn get_used_memory(performance: &Performance) -> Option<f64> {
     .ok()
 }
 
+fn performance() -> Performance {
+    js_sys::Reflect::get(&js_sys::global(), &JsValue::from_str("performance")).unwrap().dyn_into::<Performance>().unwrap()
+}
+
 pub fn measure_time_and_memory<F>(function: F) -> (f64, f64)
     where F: FnOnce() -> () {
-        let performance = 
-            web_sys::window()
-            .and_then(|wnd| wnd.performance())
-            .expect("performance should be available");
+        // let performance = 
+        //     web_sys::window()
+        //     .and_then(|wnd| wnd.performance())
+        //     .expect("performance should be available");
+        let performance: Performance = performance();
         let start_time = performance.now();
         let memory_before = get_used_memory(&performance);
         function();

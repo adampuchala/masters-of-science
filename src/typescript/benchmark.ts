@@ -1,7 +1,7 @@
 
 export function measureTimeAndMemory(block: ()=>void): [number, number] {
     const memory_before = getMemoryConsumption()
-    const start = performance.now()
+    const start =   performance.now()
     block()
     const end = performance.now()
     const memory_after = getMemoryConsumption()
