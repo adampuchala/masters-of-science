@@ -28,14 +28,16 @@ unsafe fn kernel_floyd_warshall<const N: usize>(n: usize, path: &mut Array2D<Dat
     }
 }
 
-pub fn bench<const N: usize>() {
+pub fn bench<const N: usize>() -> (f64, f64) {
     let n = N;
 
     let mut path = Array2D::<DataType, N, N>::uninit();
 
     unsafe {
         init_array(n, &mut path);
-        kernel_floyd_warshall(n, &mut path);
+        wasm_bench_tool::benchmark::measure_time_and_memory(|| {
+            kernel_floyd_warshall(n, &mut path);
+        })
     }
 }
 

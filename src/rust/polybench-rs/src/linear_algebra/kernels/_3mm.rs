@@ -96,7 +96,7 @@ pub fn bench<
     const NK: usize,
     const NL: usize,
     const NM: usize,
->() {
+>() -> (f64, f64) {
     let ni = NI;
     let nj = NJ;
     let nk = NK;
@@ -113,7 +113,9 @@ pub fn bench<
 
     unsafe {
         init_array(ni, nj, nk, nl, nm, &mut A, &mut B, &mut C, &mut D);
-        kernel_3mm(ni, nj, nk, nl, nm, &mut E, &A, &B, &mut F, &C, &D, &mut G);
+        wasm_bench_tool::benchmark::measure_time_and_memory(||{
+            kernel_3mm(ni, nj, nk, nl, nm, &mut E, &A, &B, &mut F, &C, &D, &mut G);
+        })
     }
 }
 

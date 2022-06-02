@@ -51,7 +51,7 @@ unsafe fn kernel_syr2k<const M: usize, const N: usize>(
     }
 }
 
-pub fn bench<const M: usize, const N: usize>()  {
+pub fn bench<const M: usize, const N: usize>() -> (f64, f64)  {
     let m = M;
     let n = N;
 
@@ -63,8 +63,10 @@ pub fn bench<const M: usize, const N: usize>()  {
 
     unsafe {
         init_array(m, n, &mut alpha, &mut beta, &mut C, &mut A, &mut B);
-        kernel_syr2k(m, n, alpha, beta, &mut C, &A, &B);
-}
+        wasm_bench_tool::benchmark::measure_time_and_memory(||{
+            kernel_syr2k(m, n, alpha, beta, &mut C, &A, &B);
+        })
+    }
 }
 
 #[test]

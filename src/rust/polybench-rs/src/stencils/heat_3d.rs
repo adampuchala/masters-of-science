@@ -50,7 +50,7 @@ unsafe fn kernel_heat_3d<const N: usize, const TSTEPS: usize>(
     }
 }
 
-pub fn bench<const N: usize, const TSTEPS: usize>() {
+pub fn bench<const N: usize, const TSTEPS: usize>() -> (f64, f64) {
     let n = N;
     let tsteps = TSTEPS;
 
@@ -59,7 +59,9 @@ pub fn bench<const N: usize, const TSTEPS: usize>() {
 
     unsafe {
         init_array::<N, TSTEPS>(n, &mut A, &mut B);
-        kernel_heat_3d::<N, TSTEPS>(tsteps, n, &mut A, &mut B);
+        wasm_bench_tool::benchmark::measure_time_and_memory(|| {
+            kernel_heat_3d::<N, TSTEPS>(tsteps, n, &mut A, &mut B);
+        })
     }
 }
 

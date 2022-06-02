@@ -9,3 +9,4 @@ license = "GPLv2"
 print-result = []
 
 [dependencies]
+wasm-bench-tool = { path = "./../wasm-bench-tool"}

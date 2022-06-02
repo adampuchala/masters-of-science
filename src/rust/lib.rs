@@ -1,8 +1,8 @@
 use js_sys::Array;
 use wasm_bindgen::{prelude::*};
+use wasm_bench_tool::benchmark;
 mod collection_copy;
 pub mod matrix_multiplication;
-pub mod benchmark;
 pub mod log;
 
 #[wasm_bindgen]

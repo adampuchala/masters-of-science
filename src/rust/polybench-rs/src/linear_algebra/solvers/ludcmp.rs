@@ -75,7 +75,7 @@ unsafe fn kernel_ludcmp<const N: usize>(
     }
 }
 
-pub fn bench<const N: usize>() {
+pub fn bench<const N: usize>() -> (f64, f64) {
     let n = N;
 
     let mut A = Array2D::<DataType, N, N>::uninit();
@@ -85,7 +85,9 @@ pub fn bench<const N: usize>() {
 
     unsafe {
         init_array(n, &mut A, &mut b, &mut x, &mut y);
-        kernel_ludcmp(n, &mut A, &b, &mut x, &mut y);
+        wasm_bench_tool::benchmark::measure_time_and_memory(||{
+            kernel_ludcmp(n, &mut A, &b, &mut x, &mut y);
+        })
 }
 }
 #[test]

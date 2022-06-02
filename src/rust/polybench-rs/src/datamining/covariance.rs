@@ -51,7 +51,7 @@ unsafe fn kernel_covariance<const M: usize, const N: usize>(
     }
 }
 
-pub fn bench<const M: usize, const N: usize>() {
+pub fn bench<const M: usize, const N: usize>() -> (f64, f64) {
     let m = M;
     let n = N;
 
@@ -62,7 +62,9 @@ pub fn bench<const M: usize, const N: usize>() {
 
     unsafe {
         init_array(m, n, &mut float_n, &mut data);
-        kernel_covariance(m, n, float_n, &mut data, &mut cov, &mut mean);
+        wasm_bench_tool::benchmark::measure_time_and_memory(|| {
+            kernel_covariance(m, n, float_n, &mut data, &mut cov, &mut mean)
+        })
     }
 }
 
